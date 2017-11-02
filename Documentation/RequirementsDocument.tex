@@ -94,33 +94,36 @@
 
 \subsection{Purpose}
 In the world today there is a need to sort seed.
-Resons for sorting seed may include grading for pricing pourposes or cleaning for reseeding.
-This is an arduous task requireing, for example a researcher to go through the seed on by one under a microscope to determine the seed type and sort it.
+Reasons for sorting seed may include grading for pricing purposes or cleaning for reseeding.
+This is an arduous task requiring, for example a researcher to go through the seed on by one under a microscope to determine the seed type and sort it.
 The difficulty is compounded when working will small seeds like those produced by grass plants and usually 90 percent or more of the seed is good seed.
 Thus we are working on a device to reduce the work required to sort seed with a focus on sorting grass seed.
-The product we are working on is being designed for the OSU Seed Lab, making the labtechs working for them our primary audence.
-There is however a secondary group that this device could be targeted to namely farmers needing to clean small batches of seed for reseeding and other such usecases.
+The product we are working on is being designed for the OSU Seed Lab, making the lab-techs working for them our primary audience.
+There is however a secondary group that this device could be targeted to namely farmers needing to clean small batches of seed for reseeding and other such use cases.
 
 \subsection{Scope}
 The product to be created by our team is a program that is to work with a theoretical set of hardware components to sort seed.
-This program is designed to take a photo of the seed (in this case grass) process it localy and then send to the device signal to the hardware.
-The algorith we make should be able to accurately identify alen seed within an minimum 80% margin of error.
+This program is designed to take a photo of the seed (in this case grass) process it locally and then send to the device signal to the hardware.
+The algorithm we make should be able to accurately identify alien seed within an minimum 80% margin of error.
 When testing seed the fully assembled device should be able to process about 14 seeds per Second.
 The client would like it to be able to process a batch Of 25,000 seeds in approximately 30 minutes.
-Additionaly there was a desire that the device have some sort of user interface which would allow the user to change values and get feedback.
-When working on the above program we need to build it in such a way that the folowing extentions to our product are possible.
+Additionally there was a desire that the device have some sort of user interface which would allow the user to change values and get feedback.
+When working on the above program we need to build it in such a way that the following extensions to our product are possible.
 The first is the ability for the user to train the device or be able to switch seed type through some user installable upgrade.
-The second was caegorising the oftype seed thus giving an estimation of what types of alen seeds are present in the sample.
-Should we accomplish all of the above requirements to the best of our ability with significant time left before the deadline the client would like us to start on one of the two extention projects.
+The second was categorizing the of-type seed thus giving an estimation of what types of alien seeds are present in the sample.
+Should we accomplish all of the above requirements to the best of our ability with significant time left before the deadline the client would like us to start on one of the two extension projects.
 
 \subsection{Definitions acronyms and abbreviations}
+
 Client: In this case our client is OSU Seed Lab
 
-Labtech: Someone who sorts and identifies seed for OSU Seed Lab.
+Lab-tech: Someone who sorts and identifies seed for OSU Seed Lab.
 
 Researcher: Someone who works at OSU Seed Lab.
 
 OSU: Oregon State University
+
+of-type: unwanted seed
 
 \subsection{Overview}
 unfinished
@@ -133,25 +136,24 @@ unfinished
 The software is to be built on a
 unfinished
 \subsubsection{User Interfaces}
-The user will be interacting witht the product in 2 primary ways.
+The user will be interacting with the product in 2 primary ways.
 The first is quite simple and simply re
-un finished
+unfinished
 \subsubsection{Software Interfaces}
 Our Product will have four software interfaces.
-The two interfaces are to designed to connect to the two expantion projects and the other two are dependencys of the project.
-This project is being built on a linux device so that we will not have to deal with low level programming.
-Additionaly the product will be using a libarary to help us with machene vision
-To allow the interface expantion and changing the seed we are sorting we are simpley exposing data that wiould be usefull in that case when building our classes.
-To clasify the bad seed we are exposing all of the bad seed pictures and leaving them in a file on the device such that it can be accessed easyly
+The two interfaces are to designed to connect to the two expansion projects and the other two are dependency's of the project.
+This project is being built on a Linux device so that we will not have to deal with low level programming.
+Additionally the product will be using a library to help us with machine vision
+To allow the interface expansion and changing the seed we are sorting we are simply exposing data that would be useful in that case when building our classes.
+To classify the bad seed we are exposing all of the bad seed pictures and leaving them in a file on the device such that it can be accessed easily
 \subsubsection{Product perspective}
 unfinished
 
 \subsubsection{Memory constraints}
 unfinished
 \subsubsection{Operations}
-The basic opperations of this device are as simple as turing it on.
-This will not be the case if someone creates the expanshon project.
-
+The basic operations of this device are as simple as turning it on.
+This will not be the case if someone creates the expansion project.
 
 
 \subsection{Product functions}
@@ -178,6 +180,7 @@ That said we do have some access to a camera system the last group was able to s
 The assumption is being made that we don’t need to build any of the hardware components.
 We are also assuming that we only need to send a true false signal to the hardware team.
 Finally, we assume that the hardware specs are what we specify regardless of what the mechanical team makes.
+
 \subsection{Apportioning of requirements}
 
 
@@ -200,9 +203,9 @@ He also mentioned that accuracy should not be sacrificed to increase speed.
 \gantttitlelist{"Fall","Winter","Spring"}{10} \\
 \gantttitlelist{1,...,30}{1} \\
 %\ganttgroup{Group 1}{1}{7} \\
-\ganttbar{Reseach}{1}{6} \\
-\ganttbar{Camera Testing}{5}{8}
-\ganttbar{Algorithm Testing}{5}{10}
+\ganttbar{Reseach}{1}{6} \\\ganttnewline
+\ganttbar{Camera Testing}{5}{8}\ganttnewline
+\ganttbar{Algorithm Testing}{5}{10}\ganttnewline
 \ganttbar{Algorithm Implementation}{10}{23} \ganttnewline
 \ganttbar{Expantion Project}{20}{23} \ganttnewline
 \ganttmilestone{Be Done}{23} \ganttnewline
