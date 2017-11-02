@@ -115,15 +115,44 @@ Should we accomplish all of the above requirements to the best of our ability wi
 
 \subsection{Definitions acronyms and abbreviations}
 Client: In this case our client is OSU Seed Lab
-Labtech: Someone who sorts and identifies seed for OSU Seed Lab.
-Researcher: Someone who works at OSU Seed Lab.
-OSU: Oregon State University
-\subsection{Overview}
 
+Labtech: Someone who sorts and identifies seed for OSU Seed Lab.
+
+Researcher: Someone who works at OSU Seed Lab.
+
+OSU: Oregon State University
+
+\subsection{Overview}
+unfinished
 
 \section{Overall description}
 
 \subsection{Product perspective}
+
+\subsubsection{System Interfaces}
+The software is to be built on a
+unfinished
+\subsubsection{User Interfaces}
+The user will be interacting witht the product in 2 primary ways.
+The first is quite simple and simply re
+un finished
+\subsubsection{Software Interfaces}
+Our Product will have four software interfaces.
+The two interfaces are to designed to connect to the two expantion projects and the other two are dependencys of the project.
+This project is being built on a linux device so that we will not have to deal with low level programming.
+Additionaly the product will be using a libarary to help us with machene vision
+To allow the interface expantion and changing the seed we are sorting we are simpley exposing data that wiould be usefull in that case when building our classes.
+To clasify the bad seed we are exposing all of the bad seed pictures and leaving them in a file on the device such that it can be accessed easyly
+\subsubsection{Product perspective}
+unfinished
+
+\subsubsection{Memory constraints}
+unfinished
+\subsubsection{Operations}
+The basic opperations of this device are as simple as turing it on.
+This will not be the case if someone creates the expanshon project.
+
+
 
 \subsection{Product functions}
 The primary function of this product to sort grass seed and remove all the bad or undesirable seed (in this case tall fescue and perennial rye grass are the hardest two we will need to sort and make it the focus of this project).
@@ -170,18 +199,17 @@ He also mentioned that accuracy should not be sacrificed to increase speed.
 \gantttitlelist{2017,2018}{10} \\
 \gantttitlelist{"Fall","Winter","Spring"}{10} \\
 \gantttitlelist{1,...,30}{1} \\
-\ganttgroup{Group 1}{1}{7} \\
-\ganttbar{Algorithm testing}{1}{2} \\
-\ganttbar{Algorithm Implementation}{3}{7} \ganttnewline
-\ganttbar{Algorithm Documentation}{3}{7} \ganttnewline
-\ganttmilestone{finish Basic Algorithm}{7} \ganttnewline
-\ganttbar{Final Task}{8}{12}
+%\ganttgroup{Group 1}{1}{7} \\
+\ganttbar{Reseach}{1}{6} \\
+\ganttbar{Camera Testing}{5}{8}
+\ganttbar{Algorithm Testing}{5}{10}
+\ganttbar{Algorithm Implementation}{10}{23} \ganttnewline
+\ganttbar{Expantion Project}{20}{23} \ganttnewline
+\ganttmilestone{Be Done}{23} \ganttnewline
 
-\ganttlink{elem1}{elem3}
-\ganttlink{elem1}{elem2}
 
-\ganttlink{elem2}{elem4}
-\ganttlink{elem3}{elem4}
+%\ganttlink{elem1}{elem3}
+
 
 
 \end{ganttchart}
