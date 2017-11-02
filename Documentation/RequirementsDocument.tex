@@ -97,9 +97,25 @@ There are many potential challenges with this project. The first challenge I see
 Another notable challenge I see is the speed at which the classifier will be able to test the real-time images of the seeds being inputted. Our client expects to have a conveyor belt, with a camera suspended in the middle. It is hooked up to a computer and constantly uploading images of seeds to be tested. If the classifier classified the seed as an off-type, it is flagged and the computer will send a signal to the conveyor belt, which will indicate it should stop. Although the conveyor belt is not our responsibility, the testing phase needs to be quick enough that it can keep up with the belt.
 Finally, one of the biggest challenges is in the data collection phase. The grass seed is incredibly small, which means that a camera with a high-powered lens is required. Any visual noise could drastically affect accuracy. Furthermore, the normalization of the data could prove problematic if our images are not sufficiently clear. It is imperative we choose the right machine learning tool for this project as we do not have the time to spend a week training. Tensorflow is an attractive candidate for this job but it is implemented in Python, which leads me to believe that training could take too long to be feasible. Finding the right tool is imperative as we need to something that can process and train our images in a feasible window of time if we are to get accurate results.
 
+
+
+1 INTRODUCTION
+
+2 OVERALL DESCRIPTION
+
+3 SPECIFIC REQUIREMENTSS
+
+
 \section{Introduction}
+The purpose of this project is to identify off-type seeds in real-time.
+The seeds go through a conveyor belt with a camera constantly feeding inuges to the classifier via a USB connection to a computer.
+If an off-type is detected, the computer will send a signal and the conveyor belt will trash any seeds in the picture involving a bad seed, The client allows false negatives but limits false positives.
+The Scope Of this project involves implementing a machine learning to identify seeds in real-time.
+Anything beyond the software is out Of this project's scope.
+The classifier Should binary.
+This means It only has to determine if a seed IS an off-type or desired type, Which is Tall Fescue In this case.
  \section{Purpose}
-In this world there is a need to sort seed. 
+In this world there is a need to sort seed.
 This could be for many reasons from a farmer wanting to take bad seed out of the seed he is saving, to a lab tech tasked with categorizing seed.
 In the case of this project we are working with the osu seed lab.
 They are sent many packets of random seed and are tasked with grading it.
@@ -108,9 +124,29 @@ When doing this usually 90 percent or more of the seed is good seed.
 Because the lab tech needs to sort these seeds by hand it is a very taxing job.
 Thus, our goal is to remove 80% of the good seed so that the seed given to the lab tech is the seed he is interested in.
 Making it so that he is only focusing on the seed that is important to his job.
+
+The machine learning algorithm should be able to accurately identify off-types with a 20% margin of error.
+The testing phase of the product should process 14 seeds per second.
+This means it should be able to process a batch of 25,000 seeds in approximately 30 minutes.
+The user expressed interest in an interface that will allow them to train images of other desired seed.
+There are two major constraints for this project: time and accuracy Accuracy is easily the most
+important here as allowing too many off-types into the good seed batch Will make the batch unusable.
+At the minimum, the classifier should be able to identify good seed with a 100% aculracy.
+The other constraint is time.
+A batch of seeds should take about 30 minutes to complete.
+The client mentioned they are more flexible In this regard.
+He also mentioned that accuracy should not be sacrificed to increase speed.
  \section{Scope}
 The scope of this project is removing good grass seed from bad grass and weed seed.
 The projects scope only requires we be able to sort one type of grass seed out of the others and that the seeds we are sorting will look no similar than perennial rye grass and tall fescue.
+
+The machine learning algorithm should be able to accurately identify off-types with a margin of error.
+The testing phase Of the product should process 14 seeds per Second.
+This it be able to process a batch Of 25,000 seeds in approximately 30 minutes. are the hard requirements for the project.
+The Client expressed interest in an interface, which would allow him to train images of other desired seeds.
+It was decided that this would be implemented as a STRETCH goal.
+The client also expressed interest in categorizing the off-type seeds.
+It was also agreed that this would be a STRETCH goal and would be implemented if time constraints are not too tight. 
  \section{Definitions acronyms and abbreviations}
 Client: In this case our client is OSU Seed Lab
 Labtech: someone who sorts and identifies seed for OSU Seed Lab
