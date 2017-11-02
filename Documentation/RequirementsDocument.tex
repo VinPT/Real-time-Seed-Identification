@@ -2,6 +2,7 @@
 \usepackage{graphicx}
 \usepackage{url}
 \usepackage{setspace}
+\usepackage{pgfgantt}
 
 \usepackage{geometry}
 \geometry{textheight=9.5in, textwidth=7in}
@@ -146,7 +147,7 @@ This it be able to process a batch Of 25,000 seeds in approximately 30 minutes. 
 The Client expressed interest in an interface, which would allow him to train images of other desired seeds.
 It was decided that this would be implemented as a STRETCH goal.
 The client also expressed interest in categorizing the off-type seeds.
-It was also agreed that this would be a STRETCH goal and would be implemented if time constraints are not too tight. 
+It was also agreed that this would be a STRETCH goal and would be implemented if time constraints are not too tight.
  \section{Definitions acronyms and abbreviations}
 Client: In this case our client is OSU Seed Lab
 Labtech: someone who sorts and identifies seed for OSU Seed Lab
@@ -174,6 +175,27 @@ That said we do have some access to a camera system the last group was able to s
 The assumption is being made that we don’t need to build any of the hardware components.
 We are also assuming that we only need to send a true false signal to the hardware team.
 Finally, we assume that the hardware specs are what we specify regardless of what the mechanical team makes.
+
+
+\begin{ganttchart}{1}{30}
+\gantttitlelist{2017,2018}{10} \\
+\gantttitlelist{"Fall","Winter","Spring"}{10} \\
+\gantttitlelist{1,...,30}{1} \\
+\ganttgroup{Group 1}{1}{7} \\
+\ganttbar{Algorithm testing}{1}{2} \\
+\ganttbar{Algorithm Implementation}{3}{7} \ganttnewline
+\ganttbar{Algorithm Documentation}{3}{7} \ganttnewline
+\ganttmilestone{finish Basic Algorithm}{7} \ganttnewline
+\ganttbar{Final Task}{8}{12}
+
+\ganttlink{elem1}{elem3}
+\ganttlink{elem1}{elem2}
+
+\ganttlink{elem2}{elem4}
+\ganttlink{elem3}{elem4}
+
+
+\end{ganttchart}
 
 
 \end{document}
