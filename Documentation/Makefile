@@ -1,7 +1,7 @@
-filename=capstone
+filename=RequirementsDocument
 
 pdf: ps
-	ps2pdf ${filename}.ps
+	ps2pdf ${filename}.tex
 
 pdf-print: ps
 	ps2pdf -dColorConversionStrategy=/LeaveColorUnchanged -dPDFSETTINGS=/printer ${filename}.ps
