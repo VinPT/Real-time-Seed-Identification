@@ -190,42 +190,42 @@ In this case tall fescue and perennial rye grass are the hardest two we will nee
 In the future the client expressed a desire to have the device determine the type of each seed running through the device however as they require 100\% success this is something beyond the scope of this project.
 
 \subsection{User characteristics}
-The use case for this device is twofold.
-The first and primary user is the Seed lab.
-Where the user would be some sort of lab tech who would be using the device to reduce their work.
+There are two target users for this device.
+The first and primary user is the lab workers at the Seed Lab.
+Where the user would be some sort of lab tech who would be using the device to reduce their work load.
+This user would be trained professonals hired by the Seed Lab.
+These users would have indepth knolage about the process the device is trying automate but may have little to no computer experence.
 The other possible user is a seed enthusiast in the public.
-The client said somethings about wanting to in the future expand the project into some sort of product that could be used by anyone who wanted to sort seed.
+Our client said something about wanting to, potentialy in the future, merge capstone projects and expand the project into some sort of product that could be used by anyone who wanted to sort seed.
+This user could be at any stage of under standing the process the device is trying automate and may or may not have computer experence.
 
 \subsection{Constraints}
 This project has a few true constraints provided by the client.
-These constraints are we must have no false positives. We must be able to remove at least 80% of the good seed from the bad seed.
-We must identify about 14 seeds per second.
+These constraints are we must have no false positives.
+The device must be able to remove at least 80\% of the good seed from the bad seed with no false positives.
+It has been stressed that there must be no alien seed in the good seed at the end of the devices run.
+We must program it to identify about 14 seeds per second.
+This means it should be able to process a batch of 25,000 seeds in approximately 30 minutes.
 In addition to this the client expressed a desire for some additional systems in the future and wanted us to take that in consideration when building our system.
-These future projects are, allowing the client to change the seed sorted on the device by allowing the client to train it or get an update to the device that will train the device and the other possible expiation project was to identify the bad seed that was removed from the good seed.
+
+There are two future projects we discussed with the client.
+The first is allowing the client to change the seed sorted on the device by letting the client train the device or install some sort of an update to the device.
+The other possible expantion project was to identify the bad seed that was removed from the good seed.
 
 \subsection{Assumptions and dependencies}
 Though our project has some equipment we can use from a previous project the client seems to be wanting us to start from scratch.
-That said we do have some access to a camera system the last group was able to setup and get working.
-The assumption is being made that we don’t need to build any of the hardware components.
+This reduces the dependencys our group will have to contend with.
+The only two potential dependancys are a camera system the last group was able to setup and get working and the test bed as the only prebuilt system we have access to the old groups project.
+
+The assumptions we are making are as follows
+The first assumption is that we don’t need to build any of the hardware components.
 We are also assuming that we only need to send a true false signal to the hardware team.
 Finally, we assume that the hardware specs are what we specify regardless of what the mechanical team makes.
 
-\subsection{Apportioning of requirements}
+\subsection{External Interfaces}
+The base project has no true user facing external interface but does have an interface with the hardware teems project.
+This interface is a simple true false signal sent through one of the gpio pins.
 
-
-
-
-The machine learning algorithm should be able to accurately identify off-types with a 20\% margin of error.
-The testing phase of the product should process 14 seeds per second.
-This means it should be able to process a batch of 25,000 seeds in approximately 30 minutes.
-The user expressed interest in an interface that will allow them to train images of other desired seed.
-There are two major constraints for this project: time and accuracy Accuracy is easily the most
-important here as allowing too many off-types into the good seed batch Will make the batch unusable.
-At the minimum, the classifier should be able to identify good seed with a 100\% aculracy.
-The other constraint is time.
-A batch of seeds should take about 30 minutes to complete.
-The client mentioned they are more flexible In this regard.
-He also mentioned that accuracy should not be sacrificed to increase speed.
 
 \newpage
 \begin{landscape}
