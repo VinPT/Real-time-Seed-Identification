@@ -1,4 +1,4 @@
-filename=requirements_document
+filename=RequirementsDocument
 
 pdf: ps
 	ps2pdf ${filename}.tex
