@@ -4,6 +4,7 @@
 \usepackage{setspace}
 \usepackage{pgfgantt}
 \usepackage{titlesec}
+\usepackage{lscape}
 
 \usepackage{geometry}
 \geometry{textheight=9.5in, textwidth=7in}
@@ -96,7 +97,7 @@
 In the world today there is a need to sort seed.
 Reasons for sorting seed may include grading for pricing purposes or cleaning for reseeding.
 This is an arduous task requiring, for example a researcher to go through the seed on by one under a microscope to determine the seed type and sort it.
-The difficulty is compounded when working will small seeds like those produced by grass plants and usually 90 percent or more of the seed is good seed.
+The difficulty is compounded when working will small seeds like those produced by grass plants and usually 90\% or more of the seed is good seed.
 Thus we are working on a device to reduce the work required to sort seed with a focus on sorting grass seed.
 The product we are working on is being designed for the OSU Seed Lab, making the lab-techs working for them our primary audience.
 There is however a secondary group that this device could be targeted to namely farmers needing to clean small batches of seed for reseeding and other such use cases.
@@ -104,7 +105,7 @@ There is however a secondary group that this device could be targeted to namely 
 \subsection{Scope}
 The product to be created by our team is a program that is to work with a theoretical set of hardware components to sort seed.
 This program is designed to take a photo of the seed (in this case grass) process it locally and then send to the device signal to the hardware.
-The algorithm we make should be able to accurately identify alien seed within an minimum 80% margin of error.
+The algorithm we make should be able to accurately identify alien seed within an minimum 80\% margin of error.
 When testing seed the fully assembled device should be able to process about 14 seeds per Second.
 The client would like it to be able to process a batch Of 25,000 seeds in approximately 30 minutes.
 Additionally there was a desire that the device have some sort of user interface which would allow the user to change values and get feedback.
@@ -158,7 +159,7 @@ This will not be the case if someone creates the expansion project.
 
 \subsection{Product functions}
 The primary function of this product to sort grass seed and remove all the bad or undesirable seed (in this case tall fescue and perennial rye grass are the hardest two we will need to sort and make it the focus of this project).
-In the future the client expressed a desire to have the device determine the type of each seed running through it however as they require 100% success this is something beyond the scope of this project.
+In the future the client expressed a desire to have the device determine the type of each seed running through it however as they require 100\% success this is something beyond the scope of this project.
 
 \subsection{User characteristics}
 The use case for this device is twofold.
@@ -198,17 +199,28 @@ A batch of seeds should take about 30 minutes to complete.
 The client mentioned they are more flexible In this regard.
 He also mentioned that accuracy should not be sacrificed to increase speed.
 
+\newpage
+\begin{landscape}
+\section{Gantt Chart}
+
 \begin{ganttchart}{1}{30}
-\gantttitlelist{2017,2018}{10} \\
+
+\gantttitlelist{2017}{10}
+\gantttitlelist{2018}{20} \\
+
 \gantttitlelist{"Fall","Winter","Spring"}{10} \\
-\gantttitlelist{1,...,30}{1} \\
+
+\gantttitlelist{1,...,10}{1}
+\gantttitlelist{1,...,10}{1}
+\gantttitlelist{1,...,10}{1}\\
+
 %\ganttgroup{Group 1}{1}{7} \\
-\ganttbar{Reseach}{1}{6} \\\ganttnewline
-\ganttbar{Camera Testing}{5}{8}\ganttnewline
-\ganttbar{Algorithm Testing}{5}{10}\ganttnewline
-\ganttbar{Algorithm Implementation}{10}{23} \ganttnewline
-\ganttbar{Expantion Project}{20}{23} \ganttnewline
-\ganttmilestone{Be Done}{23} \ganttnewline
+\ganttbar{Research}{1}{6} \\
+\ganttbar{Camera Testing}{5}{8}\\
+\ganttbar{Algorithm Testing}{5}{10}\\
+\ganttbar{Algorithm Implementation}{10}{23} \\
+\ganttbar{Expansion Project}{20}{23} \\
+\ganttmilestone{Be Done}{23} \\
 
 
 %\ganttlink{elem1}{elem3}
@@ -216,6 +228,6 @@ He also mentioned that accuracy should not be sacrificed to increase speed.
 
 
 \end{ganttchart}
-
+\end{landscape}
 
 \end{document}
