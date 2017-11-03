@@ -126,6 +126,13 @@ OSU: Oregon State University
 
 of-type: unwanted seed
 
+https://developer.nvidia.com/deep-learning-frameworks
+
+https://developer.nvidia.com/deep-learning-software
+
+https://developer.nvidia.com/cuDNN
+
+https://www.microsoft.com/en-us/cognitive-toolkit/
 \subsection{Overview}
 unfinished
 
@@ -133,33 +140,54 @@ unfinished
 
 \subsection{Product perspective}
 
-\subsubsection{System Interfaces}
-The software is to be built on a
-unfinished
+% I dont understand the section below
+%\subsubsection{System Interfaces}
+%The software is to be built on a
+%unfinished
 \subsubsection{User Interfaces}
 The user will be interacting with the product in 2 primary ways.
-The first is quite simple and simply re
-unfinished
+The first is quite simple.
+To run the base device the user must fill a hopper at one end of the device with the seed to be sorted and then turn the device on.
+The second way the user may interact with the device is through a screen should we start work on the user interface extention project.
+\subsubsection{Hardware Interfaces}
+We are using at least 3 hardware componets these are the camera, the nvidia jetson chip, and the Convayorbelt.
+There is also the option to add more memory through a disk drive.
+The way we intend to interface with the camera is over usb.
+If USB is not fast enough we may try to switch to the csi-2 MIPI camera serial interface.
+The convaor on the other hand will be comunicated to over GPIO pins.
+
 \subsubsection{Software Interfaces}
-Our Product will have four software interfaces.
-The two interfaces are to designed to connect to the two expansion projects and the other two are dependency's of the project.
-This project is being built on a Linux device so that we will not have to deal with low level programming.
-Additionally the product will be using a library to help us with machine vision
+Our Product will have three main levels of software interfaces.
+
+The first is the opperating system.
+Though the current assumption is we are using NVIDIA's a modified Ubuntu 13.04 Linux distro.
+
+The second level of software interfaces is the librarys we are going to use.
+We are using A Jetson computer thus we will probably want to use cuDNN to get better Gpu acceleration and OpenCV to help see the seeds.
+As for the library we are going to pick to do the deep learning we are still testing between Caffe2, CNTK, TensorFlow, Torch and dmlc mxnet.
+Because there are many choices with the deep learning library and it is such a big part of the project we plan to look into this in more detail and run some tests before picking one.
+The package we will be using is the most modern suported verson of the library we pick as of November 2017.
+
+In addition we have the requirement to build our system with two expantion projects in mind.
 To allow the interface expansion and changing the seed we are sorting we are simply exposing data that would be useful in that case when building our classes.
-To classify the bad seed we are exposing all of the bad seed pictures and leaving them in a file on the device such that it can be accessed easily
-\subsubsection{Product perspective}
-unfinished
+To classify the bad seed we are exposing all of the bad seed pictures and leaving them in a file on the device such that it can be accessed easily.
 
 \subsubsection{Memory constraints}
-unfinished
+The device we are working on has 2GB ram as primary storage.
+The secondary storege option on this device is provided by a full sixe sd slot and 16GB fast eMMC 4.51 onboard the chip.
+This limits our secondary storage the the size of sd card we get upto and including 512Gb.
+There is also mini-PCIe and SATA port that can be used to expand the storage space on the device should we need it.
+There should be 1 USB 3.0 port on the device this port will probably be used for the camera limiting our ability to use a flashdrive for extnded secondary storage.
+
 \subsubsection{Operations}
 The basic operations of this device are as simple as turning it on.
 This will not be the case if someone creates the expansion project.
-
+If someone does work on that project there will be some sort of screen added to the device allowing the user to interact with the added fuctionality.
 
 \subsection{Product functions}
-The primary function of this product to sort grass seed and remove all the bad or undesirable seed (in this case tall fescue and perennial rye grass are the hardest two we will need to sort and make it the focus of this project).
-In the future the client expressed a desire to have the device determine the type of each seed running through it however as they require 100\% success this is something beyond the scope of this project.
+The primary function of this product to sort grass seed with the requirement of removing 80\% or more of the desired seed from the origonal seed mix with zero false positives.
+In this case tall fescue and perennial rye grass are the hardest two we will need to sort; Thus it the focus of this project.
+In the future the client expressed a desire to have the device determine the type of each seed running through the device however as they require 100\% success this is something beyond the scope of this project.
 
 \subsection{User characteristics}
 The use case for this device is twofold.
@@ -187,13 +215,13 @@ Finally, we assume that the hardware specs are what we specify regardless of wha
 
 
 
-The machine learning algorithm should be able to accurately identify off-types with a 20% margin of error.
+The machine learning algorithm should be able to accurately identify off-types with a 20\% margin of error.
 The testing phase of the product should process 14 seeds per second.
 This means it should be able to process a batch of 25,000 seeds in approximately 30 minutes.
 The user expressed interest in an interface that will allow them to train images of other desired seed.
 There are two major constraints for this project: time and accuracy Accuracy is easily the most
 important here as allowing too many off-types into the good seed batch Will make the batch unusable.
-At the minimum, the classifier should be able to identify good seed with a 100% aculracy.
+At the minimum, the classifier should be able to identify good seed with a 100\% aculracy.
 The other constraint is time.
 A batch of seeds should take about 30 minutes to complete.
 The client mentioned they are more flexible In this regard.
