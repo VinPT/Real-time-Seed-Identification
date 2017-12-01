@@ -1,0 +1,196 @@
+\documentclass[onecolumn, draftclsnofoot,10pt, compsoc]{IEEEtran}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{setspace}
+\usepackage{pgfgantt}
+\usepackage{titlesec}
+\usepackage{lscape}
+\usepackage{cite}
+
+\usepackage{geometry}
+\geometry{textheight=9.5in, textwidth=7in}
+
+% 1. Fill in these details
+\def \CapstoneTeamName{            Green Team}
+\def \CapstoneTeamNumber{        11}
+%\def \GroupMemberOne{            Omar Elgebaly}
+%\def \GroupMemberTwo{            Xiaoyi Yang}
+\def \GroupMemberThree{            Vinayaka Thompson}
+\def \CapstoneProjectName{        Real-time Seed Identification}
+\def \CapstoneSponsorCompany{    Oregon State University Crop Science Department}
+\def \CapstoneSponsorPerson{    Daniel Curry}
+
+% 2. Uncomment the appropriate line below so that the document type works
+\def \DocType{        %Requirements Document
+                %Requirements Document
+                Technology Review
+                %Design Document
+                %Progress Report
+                }
+
+\newcommand{\NameSigPair}[1]{\par
+\makebox[2.75in][r]{#1} \hfil     \makebox[3.25in]{\makebox[2.25in]{\hrulefill} \hfill        \makebox[.75in]{\hrulefill}}
+\par\vspace{-12pt} \textit{\tiny\noindent
+\makebox[2.75in]{} \hfil        \makebox[3.25in]{\makebox[2.25in][r]{Signature} \hfill    \makebox[.75in][r]{Date}}}}
+% 3. If the document is not to be signed, uncomment the RENEWcommand below
+\renewcommand{\NameSigPair}[1]{#1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{titlepage}
+    \pagenumbering{gobble}
+    \begin{singlespace}
+        %\includegraphics[height=4cm]{coe_v_spot1}
+        \hfill
+        % 4. If you have a logo, use this includegraphics command to put it on the coversheet.
+        %\includegraphics[height=4cm]{CompanyLogo}
+        \par\vspace{.2in}
+        \centering
+        \scshape{
+            \huge CS Capstone \DocType \par
+            {\large\today}\par
+            {\large CS461 Fall 2017}\par
+            \vspace{.5in}
+            \textbf{\Huge\CapstoneProjectName}\par
+            \vfill
+            {\large Prepared for}\par
+            \Huge \CapstoneSponsorCompany\par
+            \vspace{5pt}
+            {\Large\NameSigPair{\CapstoneSponsorPerson}\par}
+            {\large Prepared by }\par
+            Group\CapstoneTeamNumber\par
+            % 5. comment out the line below this one if you do not wish to name your team
+            \CapstoneTeamName\par
+            \vspace{5pt}
+            {\Large
+%                \NameSigPair{\GroupMemberOne}\par
+ %               \NameSigPair{\GroupMemberTwo}\par
+                \NameSigPair{\GroupMemberThree}\par
+            }
+            \vspace{20pt}
+        }
+        \begin{abstract}
+        % 6. Fill in your abstract
+
+
+        \end{abstract}
+    \end{singlespace}
+\end{titlepage}
+\newpage
+\pagenumbering{arabic}
+\tableofcontents
+% 7. uncomment this (if applicable). Consider adding a page break.
+%\listoffigures
+%\listoftables
+\clearpage
+\section{Introduction}
+% 8. now you write!
+We are the Green team working on project 11. 
+Though we have not discussed concrete roles i believe my part is more on the side of image recognition as we do not have an expert on that in our team. 
+The End goal of this project is to create a system to sort seed that can reduce the load on the staff at the Oregon State University Seed lab. 
+To this end we are working with a mechanical team to make a system that can on average sort 14 seeds per second and let the people at the seed lab do other work with the trust that all the bad seed will be in one container and upwards of 80\% of good in the other. 
+To this end we will be writing a program on a computer system with visual recognition components. 
+The three technology's critical to this system are our operating system which will be the core upon which we work. the language which will provide the constraints that will end up binding us. last of all there is the image cleaning that will decide the quality of the images we can use.
+
+\section{Operating System}
+In all there are 3 big operating systems Mac, Linux and Windows that could be potentially viable platforms upon which to create our project. 
+That said there are significant similarities in mac and Linux  and in some ways BSD. That said however there was one difference that led me to look at BSD rather than mac.
+This was the fact that BSD has a distribution called Dragonfly BSD that focuses exclusively on speed. 
+For this reason, we decided to look at Linux Windows and Dragonfly BSD.
+
+Starting with the least common of the bunch.
+ Dragonfly BSD and other BSD distributions are part of a group of systems that were derived from UNIX. 
+At one point in time BSD was partially using code of AT&T UNIX but when the company making the system went bankrupt they released the parts of the code that were open source or that they built.
+This was about 80\% of the operating system.
+Just after that an ex member of the project completed the system by re-imagining the lost 20\% of code.
+Now that it is known what BSD is what is Dragonfly BSD.
+Dragonfly BSD is a operating system based of free BSD that decided that it would try to build the most Scalable and High-performance system possible while keeping the system small.\cite{bsd}
+This makes the system very attractive to our team as one of our problems is that we are unsure that we will have the performance to get the system to work as fast as we need it to. 
+That said the downside to free BSD is it will take much finagling to get it to work on the hardware.
+The Jetson is not supported by BSD and as such I good deal of finagling is required to get it to work.
+
+The second and most recent offer for a operating system is the windows operating system. This system is attractive as much of the operating system does not exist. 
+The premise behind windows for IOT is they have removed the GUI and replace it with your application. Allowing you to boot directly into the experience that you have created for your IOT device. \cite{win}
+In addition to that it is designed such that it lets one integrate with Cortana and Windows Cognitive services which may be an easy way to get some of the image processing we require to get the system to work.
+The system downsides are it supports only a small subset of chips and the Jetson (“the chip available from McGrath”) is not supported by this operating system and in this case will probably be unable to run on it as it is a proprietary operating system created by Microsoft.
+
+In addition, you are limited by libraries that will work on windows. This decreases the number of libraries available to us as windows is not really part of the opensource movement.
+
+The last one is Linux.
+Linux is a operating system based on UNIX that was written by Linus Torvalds. 
+This system is big in the open source community and has many different Distros or distributions of the operating system providing many different setups for different use cases.
+The biggest and most attractive part of using Linux is the fact that Ubuntu a distro of Linux is the officially supported distro for the Nvidia chip and works with the development pack that should allow us to get the most power out of the chip.\cite{cuda}
+
+Thus, we come to a crossroads where there are two potential contenders in my mind. 
+The first is Linux, if we are using the chips provided by McGrath the Linux system is what should be able to work with them out of the box. 
+This will have reduced the amount of work we will need to do just to start working on our project. 
+In addition, it will give us the NVidia development package that will let us work the gpu to the full extent of its power.
+On the other hand, if we are not using the Nvidia chip it might make sense to use the Dragonfly BSD system as it makes some good points about the speed and has a more stable release cycle.
+That said however in the end if I has a choice I would probably go with Linux. I might be biased but it has a larger community which means we would have more support and would have to fight the system less.
+
+\section{Language}
+As far as languages go I find 3 to be big in the Deep learning game these three would be C++, Python and R.
+ These languages were chosen because each is very different under the hood. 
+The first C is a low-level language focused on speed, The second is a high level language focused on ease of use, and the third is a functional language.
+
+The first language we are to look at is R. R seems to be popular in deep learning and it seems that this is due to the way the language is written.  
+R is a language written for statistical computation and is built to be modular interpreted programing language.\cite{ARR} 
+People with a strong math’s background find it easy to understand to do deep learning.
+In addition to this part of the appeal of the R language is one can use C functions in r to increase the efficiency.
+ 
+
+On the other hand, we have c.
+Though C is not the biggest player in the deep learning space it is one of the only names in image processing. OpenCV and NVidias Vison works both use C /C++ and thus it makes it quite attractive
+The Nvidia chip also has an architecture called CUDA that can be used from C/C++ to make our project run faster on the chip we use in the end. \cite{cuda}
+If needed one of the big deep learning libraries tensor flow can be used with cuDNN in C++  to get max performance out of the Nvidia gpu.
+In addition, C++ has the potential to be the fastest if we take the time to implement it properly.
+
+The last language to talk about is Python.
+Python has many things going for it. The first and most notable is the massive community in deep learning that swears by this language. 
+Upon researching languages for deep learning all I could find for a while was information on python.
+It is also I comparatively easy to use language.
+The downside however is due to the fact that it is an interpreted language it will never be as fast a language that is compiled however it will always be more portable allowing for the same code to work on many different chips.
+The argument for python is that it is a high level language used by the open source community that we all know.\cite{python}
+
+My final assessment on the decision of which programming language to use is mixed. 
+As there are benefits in all these languages. The ease of use and the community surrounding the python language is undeniable.
+ the R language has its appeal due to the way the language is written it can make it easier to understand what we are making while still letting us make modules in C allowing for higher speed
+ Finally, there is C/C++ that decides to forget trying to make it easy to program and focuses on speed. And being able to use the full extent of the chip. 
+In the end I am guessing we will need to push the speed aspect as much as possible so I am guessing our hands are tied and we will have to use C++ for no reason other than to make it faster.
+
+
+\section{Image training}
+There are quite a few libraries for image processing and thus image cleaning on the net I chose to look at OpenCV, Vison Works and python imaging library. 
+The reason for picking the first two was simple. 
+The reason they were selected is they are mentioned on the page of the chip that we will probably be using inevitably, The NVidia Jetson.
+Then for the third in the spirit of inclusivity I decided to look at one that specifically uses python.
+
+The Library I have known in the past to do image processing is open CV it is probably the biggest name in the image processing area. 
+The site boasts the community size being around 47 thousand.\cite{opencv}
+This program can work in Both python and C/C++.
+This should provide ample support to us should we need help looking up how to make the system work.
+Many vision functions and camera api’s to work in every scenario.\
+In addition it is multi-threaded and optimized for C/C++ hopefully making the resultant speed of our image processing fast enough to meet or exceed our clients desired speed of 14 seeds per second.
+
+The other library in question is the one created by Nvidia this library is called Vision works. It is based on the Khronos OpenVX standard and optimized for CUDA gpu’s.\cite{khronos}\cite{vision}
+As The Nvidia is GPU based this might be able to boost our speed more than OpenCV.
+This should allow us to create a faster solution on the Jetson as it uses the acceleration properties provided in the system.
+Uses graphs to optimize computation and data transfer speeds\cite{khronos}.
+This should hopefully make for a faster cleaning of the image.
+
+
+The last system I am looking at is pillow an image processing library for python.
+Pillow is a fork of the python imaging library.
+Though python imaging library was good no one had updated it recently, so it does not support python3 thus it was taken on by a new set of people and then pillow was born.
+This library supports such formats as png jpeg ppm gif and tff.\cite{dzone}
+
+In the end my understanding is that the area of computer vision is vast, and it is hard to find one thing to do everything. That said I think I looked at three very good contenders each able to do the job.
+Pillow seems the easiest to use it also seems like it would be the slowest out of the three I looked at.
+OpenCV is probably the best imaging solution for us as it has the large community and it also has a massive code base helping one complete projects at any area of the imaging spectrum. However that also would make things harder as it is more complex.
+Vision works seems like it would work well but it has a small community and only works on a very specific set of hardware.
+OpenCV seems like it would be a good fit for any imaging situation. That said if we absolutely need the extra speed Vision Works will probably end up being better 
+
+
+\bibliographystyle{ieeetr}
+\bibliography{bib}
+\end{document}
