@@ -68,10 +68,7 @@
         \begin{abstract}
         % 6. Fill in your abstract    
     The purpose of this document is to get an in depth idea for the architecture and design decisions regarding this project. We will discuss our intended audience, the design of each stage, and justify our design decisions. We will also discuss how we plan to use different technologies to implement our project.
-
-
-
-        \end{abstract}     
+   \end{abstract}     
 
     \end{singlespace}
 \end{titlepage}
@@ -99,6 +96,15 @@ Intended for developers, clients, and users of the seed classifier. It will guid
 \subsection{Conformance}
 The document conforms with client specifications and requirements provided to the design team.
 
+\subsection{Required Elements}
+\begin{itemize}
+	\item Nvidia Jettson TX2 Processor: Used for training and testing.
+	\item Vibrating Table: Used to automate the process of transporting seeds
+	\item Camera: Used to capture images of seeds
+	\item Light Source: Used to provide better lighting for the seeds
+\end{itemize}
+
+
 \section{Definitions}
 
 Off-type: Non desired seed
@@ -111,16 +117,39 @@ Preprocessing: series of transformations data must go through in order to be opt
 
 Classifier: The software that is used to determine if a seed is an off-type or Tall Fescue
 
+Top-1 Accuracy: The Top-1 accuracy indicates the probability of the classifier’s top guess for the image being correct [3]. 
+
+Untrained Data: Any images that have not undergone the training phase.
+
 
 \section{Overview of System}
+Our product seeks to streamline the arduous process of sorting off-type seeds from a batch of Tall Fescue seeds. As of now, seed analysts in the OSU Crop Science Lab will differentiate between them using a magnified lens setup and remove them by hand. Our goal is to create a program utilizing computer vision that will identify if a seed is not Tall-Fescue. It will then send a false signal to the vibrating table setup that the mechanical engineering group is working on.
+
+Our system will be based off of a vibrating table setup. Attached to the vibrating table is a funnel, suspended camera, light source, and mechanical dividers. The seeds are inserted through the funnel onto the vibrating table. The camera is connected with Jettson TX2  The camera will be set to take a picture on second intervals. As the seeds pass through, the camera will be constantly feeding images to the computer. We will implement a script that will test the trained model against each batch of images. If the Top-1 accuracy is less than 80\%, then there is an off-type in the batch. In that case, we will send a signal from the Jettson to the table indicating that it should trash those seeds. As mentioned before, we are only responsible for taking the pictures, testing them against our trained model, and sending a signal if the classifier is not at least 80\% confident that all of the seeds in the batch are Tall Fescue.
+
+\section{System Architecture}
+\subsection{Design}
+
+This section discusses the conceptual model for the project. The conceptual model will act as a guide for future developers and a high-level overview for the client. 
+
+Although we are only responsible for the software of this project, we are responsible for making it work with the hardware we are given. The seeds will be dropped onto the vibrating table via a funnel and will move through the system. The camera will capture images and run the trained model's testing script against it in real time. If the Top-1 accuracy for a captured image is less than 80\%, we will send a signal to the system indicating that the seeds in that image should be discarded.
+
+\subsection{Decomposition}
+There is a natural, sequential decomposition between parts in this system. The system has four stages: data collection data preprocessing, data training, and data testing. In the data collection phase, the camera's sole job is to capture images. These images undergo transformations in scale in the preprocessing stage before being trained on our model. The model will train on the dataset of images. Once the model is finished training, we can test it's functionality by building the model and running the test script on untrained data.
+
+\subsection{Design Rationale}
+The goal of this project is to introduce a more efficient way of sorting through seed to aid the OSU Crop Science Department. 
+The nature of this project makes it difficult to create a modular design as each stage relies on the previous one. We believe that this architecture is optimal as it follows the natural progression for any machine learning project. Splitting the project into four phases helps because it can help us more easily identify what stage we need to work on to identify bugs. For example, let us assume we have gotten to the testing stage but our classifier is giving us extremely low Top-1 percentages. This indicates the issue is likely in how we preprocessed our data, which means we would have to look into transform our data further and retraining it.
+
+\section{Design Stages}
 \subsection{Introduction}
 
-This project has been split into four distinct stages: data collection, data preprocessing, data training, and data testing. Vinayaka Thompson will be responsible for data collection. Omar Elgebaly will be responsible for data preprocessing and data training, since these two are heavily intertwined. Xiaoyi will be responsible for data testing. 
+This section will talk about the different design phases involved in this project and explain the design rationale behind each stage. This project has been split into four distinct stages: data collection, data preprocessing, data training, and data testing. Vinayaka Thompson will be responsible for data collection. Omar Elgebaly will be responsible for data preprocessing and data training, since these two are heavily intertwined. Xiaoyi will be responsible for data testing. 
 
 \subsection{Data Collection}
 In this stage, we are collecting our dataset of Tall Fescue seed images. We need approximately 10,000 images to start with. 
 
-In this stage, we are using a setup provided to us by the mechanical engineering group we are collaborating with. They have setup a vibrating table with multiple attachments to help automate the process of data collection and testing. There is a funnel attachment, which allows you to direct the seeds onto the vibrating table. Hanging above the vibrating table, we have a suspended camera that will be set to capture images on one second intervals. There will also be a light source to illuminate the seeds.
+We are using a setup provided to us by the mechanical engineering group we are collaborating with. They have setup a vibrating table with multiple attachments to help automate the process of data collection and testing. There is a funnel attachment, which allows you to direct the seeds onto the vibrating table. Hanging above the vibrating table, we have a suspended camera that will be set to capture images on one second intervals. There will also be a light source to illuminate the seeds.
 
 Our strategy for tackling this problem is to take the seeds and place them into the funnel. The funnel will transport the seeds onto the vibrating table. The camera is set to capture an image every second. With the increased visibility provided by the light source, we can reduce motion blur by reducing the shutter speed of the camera. Once we have a dataset of 10,000 images, we will move on to the data preprocessing step. 
 
@@ -129,7 +158,6 @@ We estimate that this step will take 4-5 days. We ideally want to start using th
 \subsection{Data Preprocessing}
 
 In this phase, we will need to preprocess the data we have collected. Learning algorithms generally benefit from standardization of the dataset as many of them assume the data is normally distributed, which is not necessarily the case.
-
 
 We will use TensorFlow library APIs to preprocess the data in a way the classifier can recognize. We may use scikit-learn for additional image transformation if our classifier behaves incorrectly.
 
@@ -144,9 +172,7 @@ We plan to commence image preprocessing as soon as all the data has been collect
 
 Once the data has been collected and gone through the necessary preparation to be trained in the classifier, we can commence the data training stage. 
 
-
 For this phase, our chosen processor will be the Nvidia Jettson TX2. It is a chip with both a GPU and a CPU that is designed specifically for AI computing, which makes it an ideal technology for this phase. If this processor proves to be not powerful enough, we may have to look into other platforms such as Amazon Cloud Services. This type of processor works best on a Linux operating system, so we plan to use Ubuntu. As for software, we will use TensorFlow as a training framework. The learning model we will use is inception\_resnet\_v2, which is based on the TensorFlow-Slim image classification library. The TensorFlow-Slim  (TF-Slim) image classification library is a high-level lightweight API of TensorFlow for defining, training, and evaluating complex models [2]. If TensorFlow proves to be too slow, we will implement this model using OpenCV's library instead. 
-
 
 In this phase, the preprocessed image data will be fed into a classifier that will learn the data. As of now, our preliminary goal is to accumulate a dataset of 10,000 images. The model of classifier we plan on using is Google's Inception-ResNet-v2 architecture. It is a state of the art learning model that is based on a deep convolutional neural network. We plan to use this model with the TensorFlow framework as it integrates most smoothely . One of the advantages of using this model is that it supports both Python and C++. One of the main obstacles we will face is the time it takes to train 10,000 images. Even with the Jettson processor provided to us, it could take more than a few days to train all of the data from scratch. The initial goal is to attempt to use it with the Python implementation of the image classifier. If we find that it is too slow, we will use the C++ version as C++ is an objectively better performing language with regards to speed. TensorFlow also has multi-GPU support, which we may employ if we can muster the resources to speed up the training speed.
 
@@ -165,7 +191,7 @@ The technology that will be used to move the seeds and automate the setup is a v
 \subsubsection{Early Model Test}
 The early model test will be used to determine whether the program was properly trained on the dataset of images. The purpose of the early model test is to do a quick, preliminary test to see if the software will be able to differentiate an off-type from the target seed, which is Tall Fescue. If the early model testing stage is successful, we can move on to the final model testing stage. 
 
-This type of test works by manually inputting a set of 10 images of Tall Fescue seed and a set of 10 images of the more common off-types we may encounter. If we manage to get a Top-1 accuracy of 80\%, we can commence testing by entering the final model testing stage. The Top-1 percentage indicates the probability of the classifier’s top guess for the image being correct [3]. The reason for having a preliminary stage before commencing final testing is to ensure we do not waste time testing a large batch only to discover that there is an anomaly or bug that is preventing us from reaching our desired Top-1 accuracy. The preliminary stage will allow us to quickly figure out if something is wrong. If we do not get our desired Top-1 accuracy, it means we may need to retrain more images, need better image preprocessing, or need to modify parameters.  
+This type of test works by manually inputting a set of 10 images of Tall Fescue seed and a set of 10 images of the more common off-types we may encounter. If we manage to get a Top-1 accuracy of 80\%, we can commence testing by entering the final model testing stage. The reason for having a preliminary stage before commencing final testing is to ensure we do not waste time testing a large batch only to discover that there is an anomaly or bug that is preventing us from reaching our desired Top-1 accuracy. The preliminary stage will allow us to quickly figure out if something is wrong. If we do not get our desired Top-1 accuracy, it means we may need to retrain more images, need better image preprocessing, or need to modify parameters.  
 
 The Early Model Test can be used to determine if there are bugs in the program. However, it cannot be used as a means to test accuracy because the sample size is too small. We plan on commencing the early model test by February 10th.  
 
@@ -173,9 +199,11 @@ The Early Model Test can be used to determine if there are bugs in the program. 
 
 Our final model testing stage is the test used to determine if our classifer works and can accurately identify off-type seeds in real-time. The goal of the final model test is to ensure our program reaches our target Top-1 accuracy rate, which is 80\%. This test will utilize the same approach as our data collection with regards to capturing images of the seeds.
 
-As mentioned before, we are working in tandem with a Mechanical Engineering group. They have designed a funnel system that is connected to a vibrating table. To run our final model tests, we insert our seeds through the funnel onto the vibrating table. The vibrating table will then take the seeds to the image capture area. The image capture area is the surface area that is within the suspended camera's field of view. When a batch of seeds passes through the image capture area, the camera will constantly be taking pictures and inputting them into the computer via a USB connection. As the camera is constantly feeding images of seeds in real-time to the computer, the classifier will output the probability of a seed matching Tall Fescue. If the probability that a seed is Tall Fescue is 80\%, then we can mark that seed as safe. The constraint we must work around is we need to minimize false positives as even a few can impact the quality of the seed batch. 
+As mentioned before, we are working in tandem with a mechanical engineering group. They have designed a funnel system that is connected to a vibrating table. To run our final model tests, we insert our seeds through the funnel onto the vibrating table. The vibrating table will then take the seeds to the image capture area. The image capture area is the surface area that is within the suspended camera's field of view. When a batch of seeds passes through the image capture area, the camera will constantly be taking pictures and inputting them into the computer via a USB connection and tethering software. It is important to note that it will take approximately 3-8 seconds for an image to be transferred onto the computer. As the camera is constantly feeding images of seeds in real-time to the computer, the classifier will output the probability of a seed matching Tall Fescue by running the testing script on each image. If the Top-1 accuracy of an image is less than 80\%, we can discard that batch of seeds. The constraint we must work around is we need to minimize false positives as even a few can impact the quality of the seed batch. 
 
 When the classifier outputs a probability lower than 80\%, that means there are likely off-types within the batch. The classifier will return false and send a signal from the computer to the testing setup. This signal will indicate that there is an off-type and that batch of seeds will be trashed. The reason behind trashing the seeds if there is even one off-type in the batch is because our client stated he would prefer false negatives over false positives. False positives can ruin the integrity of the batch and make it unsellable. 
+
+This stage will likely be the most difficult and extensive testing on timing in particular is needed. Our testing script for our model should run on batches of images in real time. Since it takes 3-8 seconds for an image to be transferred onto a computer via tethered shooting, we will need to implement a wait timer before running the script on the image. If the test script runs before the image has actually made it to the machine, then it will output errors. Furthermore, the vibrating table will likely need a stop button when processing the images. We are not yet sure if the Jettson TX2 will be fast enough to test images in real time at the speed of the vibrating table. 
 
 This testing phase will commence once we have our first prototype. Our estimated date of completion is February 25th. 
 
@@ -184,7 +212,6 @@ This testing phase will commence once we have our first prototype. Our estimated
 In conclusion, this project can be split into four distinct parts: data collection, data preprocessing, data training, and data testing. It is important to note that while these steps are in sequence, we will very likely find bugs that require us to jump between the phases. 
 
 \section{Design Viewpoints}
-
 \subsection{Context Viewpoint}
 It is important that we can create a suitable abstraction for the user experience when designing the components for this project. Potential users will likely come from a variety of different backgrounds with ample knowledge in their field of expertise but varied degrees of knowledge regarding operating technology. It is important we account for the fact that users with different levels of computer fluency will be using this product.
 \subsection{Structure Viewpoint}
