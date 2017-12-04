@@ -1,4 +1,4 @@
-filename=PROGRESS
+filename=progress
 
 pdf: ps
 	ps2pdf ${filename}.ps
